@@ -41,11 +41,33 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def fakeperson(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Fake person: " + fake.name() + " " + fake.phone_number() + " " + fake.street_address() + " " + fake.ssn())
 
+def init_board():
 
+    board = [[0 for x in range(edges_board_size)] for y in range(edges_board_size)]
+    for i in range(edges_board_size):
+        board[i][0] = 1
+    for i in range(edges_board_size):
+        board[edges_board_size-1][i] = 1
+    for i in range(edges_board_size):
+        board[i][edges_board_size-1] = 1
+    return board
+board_size = 20
+edges_board_size = board_size+2
 
 async def tetris(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    for i in range(10):
-        await update.message.reply_text("__________")
+    await update.message.reply_text("Quick play instructions:")
+    await update.message.reply_text(" - a (return): move piece left")
+    await update.message.reply_text(" - d (return): move piece right")
+    await update.message.reply_text(" - w (return): rotate piece counter clockwise")
+    await update.message.reply_text(" - s (return): rotate piece clockwise")
+    await update.message.reply_text(" - e (return): move the piece downwards")
+    await update.message.reply_text(" - q (return): to quit the game anytime")
+    #if error_message:
+    #    await update.message.reply_text(error_message)
+    await update.message.reply_text("Your move:")
+
+
+
 
 # savieno čata komandu ar funkciju
 app.add_handler(CommandHandler("start", start))
