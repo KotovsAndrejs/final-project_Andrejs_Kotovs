@@ -14,7 +14,10 @@ quit_game = 'quit_game'
 
 board_size = 10
 new_board_size = board_size + 2
-
+scores = []
+scores_file = open('global_score.json') # opening JSON file
+scores = json.load(scores_file) # returns JSON object as a dictionary
+scores_file.close() # Closing file
 pieces = [
     [[1], [1], [1], [1]],
     [[1, 0],
@@ -35,11 +38,6 @@ pieces = [
     [[1, 1],
      [1, 1]]
 ]
-
-# Инициализация общего файла с очками
-if not os.path.exists('total_score.json'):
-    with open('total_score.json', 'w') as file:
-        json.dump([], file)
 
 def load_total_score():
     with open('total_score.json', 'r') as file:
@@ -155,6 +153,9 @@ def merge_board_and_piece(board, curr_piece, piece_pos):
         board.remove(filled_row)
         board.insert(1, empty_row)  
         score += 100
+        score_2 = {"Score":score
+                    }
+        scores.append(score_2)
 
 def is_game_over(board, curr_piece, piece_pos):
     if not can_move_down(board, curr_piece, piece_pos) and piece_pos[0] == 0:
@@ -228,18 +229,16 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             piece_pos = get_random_position(curr_piece)
             if is_game_over(board, curr_piece, piece_pos):
                 await query.edit_message_text("Game over")
-                total_score = load_total_score()
-                total_score = total_score + score
-                save_total_score(total_score)
+                with open("global_score.json", "w") as file:
+                    json.dump(scores, file)
                 return
         do_move_down = True
     elif player_move == quit_game:
         await query.edit_message_text("Game over")
-        total_score = load_total_score()
-        total_score = total_score + score
-        save_total_score(total_score)
+        with open("global_score.json", "w") as file:
+            json.dump(scores, file)
         return
-    
+
     board_str = print_board(board, curr_piece, piece_pos, err_message, score)
     
     if not do_move_down:
@@ -261,6 +260,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# sāk bota darbību
-app.run_polling()
