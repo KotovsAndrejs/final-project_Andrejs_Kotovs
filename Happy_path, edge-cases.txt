@@ -1,0 +1,52 @@
+Happy pathes
+1. Happy path 
+Ņemot vērā: Spēles sākums: galda augšpusē tiek novietota figūra.
+Kad: Spēlētājs kustina figūru uz leju, līdz tā nokļūst apakšā.
+Tad: Figūriņai jāaizķeras savā vietā, un spēlei jāģenerē jauna figūra augšpusē.
+
+2. Happy path
+Dotais: Spēle sākas, un figūriņa tiek novietota galda augšpusē.
+Kad: Spēlētājs veiksmīgi pabeidz rindu, aizpildot visus šūnas.
+Tad: rindai jābūt izdzēstai, un spēlētāja rezultātam jāpalielinās par 100 punktiem.
+
+Use cases:
+1. Use case
+Dots: Spēlētājs sāk jaunu spēli.
+Kad: Spēlētājs nospiež pogu “Move Left”.
+Tad: Figūrai jāpārvietojas par vienu šūniņu uz kreiso pusi.
+
+2. Use case 
+Dots: Spēlētājs sāk jaunu spēli.
+Kad: Spēlētājs nospiež pogu “Pārvietot uz leju”.
+Tad: Figūrai jāpārvietojas par vienu šūnu uz leju.
+
+3. Use case
+Dots: Spēlētājs sāk jaunu spēli.
+Kad: Spēlētājs nospiež pogu “Rotēt pulksteņrādītāja virzienā”.
+Tad: Figūrai jānogriežas par 90 grādiem pulksteņrādītāja rādītāja virzienā.
+
+4. Use case 
+Dots: Spēlētājs sāk jaunu spēli.
+Kad: Spēlētājs nospiež pogu “Quit”.
+Tad:  Spēle apstājas.
+
+Edge cases
+1. Edge cases
+Dots: Figūra atrodas galda kreisajā malā.
+Kad: Spēlētājs nospiež pogu “Pārvietot pa kreisi”.
+Tad: Figūrai nav jāpārvietojas tālāk pa kreisi, un jāparādās kļūdas ziņojumam: “Nevar pārvietot pa kreisi”.
+
+2. Edge cases
+Dots: Figūriņa atrodas citas figūriņas augšpusē.
+Kad: Spēlētājs nospiež pogu “Pārvietot uz leju”.
+Tad: Figūrai jāvirzās tālāk uz leju, līdz tā vismaz vienā punktā saduras ar citu figūru, un augšpusē jārada jauna figūra.
+
+3. Edge cases
+Dotais: Figūriņa atrodas tuvu dēļa apakšai.
+Kad: Spēlētājs nospiež pogu “Pārvietot uz leju”.
+Tad: Figūriņai ir jāfiksējas savā vietā, un augšpusē ir jārada jauna figūra.
+
+4. Edge cases
+Dots: Gabals atrodas tādā pozīcijā, kurā tas nevar griezties, jo pārklājas ar citiem gabaliem.
+Kad: Spēlētājs nospiež pogu “Rotate Clockwise” vai “Rotate Counterclockwise”.
+Tad: figūra nedrīkst griezties, un tiek parādīts kļūdas ziņojums: “Nevar rotēt pulksteņrādītāja virzienā” vai “Nevar rotēt pretēji pulksteņrādītāja virzienam”.
